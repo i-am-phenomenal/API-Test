@@ -18,8 +18,8 @@ class RailInfo(models.Model):
     parking_contract_available = models.CharField(max_length=10, default="")
     space_available_no_contract = models.CharField(max_length=10, default="")
     space_not_available = models.CharField(max_length=10, default="")
-    insertedAt = models.DateTimeField(auto_now=True, db_column="inserted_at")
-    updatedAt = models.DateTimeField(auto_now=True, db_column="updated_at")
+    inserted_at = models.DateTimeField(auto_now=True, db_column="inserted_at")
+    updated_at = models.DateTimeField(auto_now=True, db_column="updated_at")
 
     class Meta:
         db_table = "rail_infos"
