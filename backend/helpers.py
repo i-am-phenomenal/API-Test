@@ -1,28 +1,27 @@
 from .models import *
+from datetime import datetime
 
 
-def create_rail_info(index, data_frame):
+def create_rail_info(row):
     return RailInfo.objects.create(
-        city=data_frame.loc[index, "City"],
-        zone=data_frame.loc[index, "Zone"],
-        division=data_frame.loc[index, "Division"],
-        connection=data_frame.loc[index, "Connection"],
-        interchange=data_frame.loc[index, "Interchange"],
-        station=data_frame.loc["Station"],
-        station_code=data_frame.loc["Station Code"],
-        distance_in_km=data_frame.loc["Distance in Kms"],
-        layout=data_frame.loc["Layout"],
-        parking_contract_available=data_frame.loc["Parking Contract Available"],
-        space_available_no_contract=data_frame.loc["Space Avaiable No Contract"],
-        space_not_available=data_frame.loc["Sapce Not Avaiable"],
+        city=row["City"],
+        zone=row["Zone"],
+        division=row["Division"],
+        connection=row["Connection"],
+        interchange=row["Interchange"],
+        station=row["Station"],
+        station_code=row["Station Code"],
+        distance_in_km=row["Distance in Kms"],
+        layout=row["Layout"],
+        parking_contract_available=row["Parking Contract Available"],
+        space_available_no_contract=row["Space Avaiable No Contract"],
+        space_not_available=row["Sapce Not Avaiable"],
         inserted_at=datetime.utcnow(),
     )
 
 
 def create_bulk_rail_info(data_frame):
-    print(data_frame.to_dict(), "q1111111111111111")
     objects = []
-    # for index,row in data_frame.iterrows():
-    #     print(row[1])
-    #     objects.append(create_rail_info(row[1], data_frame))
+    for index, row in data_frame.iterrows():
+        objects.append(create_rail_info(row))
     return objects
