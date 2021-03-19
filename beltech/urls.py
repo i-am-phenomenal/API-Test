@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from backend.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("rail_info/import_csv/", ImportCSVAPIVIew.as_view()),
+    path("getall/", RetreiveAllRailInfo.as_view()),
+    url(r"^search/$", RailInfoSearchAPIView.as_view()),
+    # url(r"^search/(?P<station>\d+)", RailInfoSearchAPIView.as_view())
 ]

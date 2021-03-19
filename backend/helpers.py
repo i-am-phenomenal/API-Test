@@ -25,3 +25,7 @@ def create_bulk_rail_info(data_frame):
     for index, row in data_frame.iterrows():
         objects.append(create_rail_info(row))
     return objects
+
+
+def get_railinfo_by_station(station):
+    return RailInfo.objects.filter(station=station)

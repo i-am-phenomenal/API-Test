@@ -12,7 +12,11 @@ import pandas as pd
 from . import helpers
 
 
-class ImportCSVAPIVIew(generics.CreateAPIView):
+class PermissionMixin:
+    permission_classes = [AllowAny]
+
+
+class ImportCSVAPIVIew(PermissionMixin, generics.CreateAPIView):
     """
     Generic view class for  importting RailInfo records from CSV
 
@@ -20,7 +24,6 @@ class ImportCSVAPIVIew(generics.CreateAPIView):
         generics (Class): Generic API class
     """
 
-    permission_classes = [AllowAny]
     serializer_class = RailInfoCSVSerializer
 
     def perform_create(self, serialized):
@@ -38,3 +41,32 @@ class ImportCSVAPIVIew(generics.CreateAPIView):
         created_objects = self.perform_create(serialized)
         resp = RailInfoSerializer(created_objects, many=True)
         return Response(resp.data, status.HTTP_201_CREATED)
+
+
+class RetreiveAllRailInfo(PermissionMixin, generics.ListAPIView):
+    """
+    Generic view class for GET (all) RailInfo records
+
+    Args:
+        generics (Class): Generic API class
+    """
+
+    serializer_class = RailInfoSerializer
+    queryset = RailInfo.objects.all()
+
+
+class RailInfoSearchAPIView(PermissionMixin, generics.ListAPIView):
+    """
+    Generic view class for GET (all) RailInfo records on the basis of station which is going to be passed through  query parameters
+
+    Args:
+        generics (Class): Generic API class
+    """
+
+    serializer_class = RailInfoSerializer
+
+    def list(self, request, *args, **kwargs):
+        print(request.GET.get("station"), "1111111111111111111")
+        info = helpers.get_railinfo_by_station(request.GET.get("station"))
+        resp = RailInfoSerializer(info, many=True)
+        return Response(resp.data, status.HTTP_200_OK)
