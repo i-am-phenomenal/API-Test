@@ -66,7 +66,27 @@ class RailInfoSearchAPIView(PermissionMixin, generics.ListAPIView):
     serializer_class = RailInfoSerializer
 
     def list(self, request, *args, **kwargs):
-        print(request.GET.get("station"), "1111111111111111111")
-        info = helpers.get_railinfo_by_station(request.GET.get("station"))
-        resp = RailInfoSerializer(info, many=True)
-        return Response(resp.data, status.HTTP_200_OK)
+        query_param = request.GET.get("station")
+        if query_param is not None:
+            info = helpers.get_railinfo_by_station(query_param)
+            resp = RailInfoSerializer(info, many=True)
+            return Response(resp.data, status.HTTP_200_OK)
+        else:
+            return Response("Invalid query param", status.HTTP_404_NOT_FOUND)
+
+
+class RailInfoCalculateDistanceAPIView(PermissionMixin, generics.RetrieveAPIView):
+    """
+    Generic view class to get distance between 2 stations on the basis of station_code
+
+    Args:
+        generics (Class): Generic API class
+    """
+
+    @helpers.validate_existence
+    def get(self, request, _from, to):
+        if _from is not None and to is not None:
+            distance = helpers.get_distance(_from, to)
+            return Response({"distance": distance}, status.HTTP_200_OK)
+        else:
+            return Response("Invalid query param", status.HTTP_404_NOT_FOUND)
