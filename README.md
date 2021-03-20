@@ -8,6 +8,8 @@ The project is implemented in Django framework (using DRF). The reason for chosi
 
 As per my knowledge base, Second option after Django was Phoenix Framework (Used with Elixir) but elixir is primarilty used to make Fault tolerant and concurrent systems and that did not seemed to be the requirements of the task at that time.
 
+NOTE: Also, proper function definition has been added for all the functions in the helper.py module as per the PEP guidelines
+
                                                             ASSUMPTIONS
 
 As of now, there is no User model in the projet and hence there is no authentication mechanism.So, everyone is allowed to make access our API's. Adding a security mechanims should not be a problem though.
