@@ -2,9 +2,12 @@ from .models import *
 from datetime import datetime
 from rest_framework.response import Response
 from rest_framework import status
+from typing import List
+import pandas as pd
+from django.db.models.query import QuerySet
 
 
-def create_rail_info(row):
+def create_rail_info(row) -> RailInfo:
     return RailInfo.objects.create(
         city=row["City"],
         zone=row["Zone"],
@@ -22,14 +25,14 @@ def create_rail_info(row):
     )
 
 
-def create_bulk_rail_info(data_frame):
+def create_bulk_rail_info(data_frame: pd.DataFrame) -> List[RailInfo]:
     objects = []
     for index, row in data_frame.iterrows():
         objects.append(create_rail_info(row))
     return objects
 
 
-def get_railinfo_by_station(station):
+def get_railinfo_by_station(station: str) -> QuerySet:
     return RailInfo.objects.filter(station=station)
 
 
@@ -51,7 +54,7 @@ def validate_existence(fn):
     return inner_fn
 
 
-def get_distance(_from, to):
+def get_distance(_from: str, to: str) -> int:
     get_distance_in_km = lambda station_code: RailInfo.objects.filter(
         station_code=station_code
     ).values_list("distance_in_km")[0][0]

@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "001783d7-2218-420c-85ad-97a914d12782",
+		"name": "Beltech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Import CSV",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"type": "file",
+							"src": "/C:/code/beltech/Sub_Urban_Rail_Chennai.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/rail_info/csv/import/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rail_info",
+						"csv",
+						"import",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rail Info Search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"type": "file",
+							"src": "/C:/code/beltech/Sub_Urban_Rail_Chennai.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/search?station=Chennai Beach RS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "station",
+							"value": "Chennai Beach RS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rail Info Get all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"value": null,
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/getall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"getall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rail Info Calculate Distance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_file",
+							"value": null,
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/distance?from=MSB&to=GDY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"distance"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "MSB"
+						},
+						{
+							"key": "to",
+							"value": "GDY"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

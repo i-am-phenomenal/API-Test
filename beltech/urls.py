@@ -20,10 +20,8 @@ from backend.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("rail_info/import_csv/", ImportCSVAPIVIew.as_view()),
+    path("rail_info/csv/import/", ImportCSVAPIVIew.as_view()),
     path("getall/", RetreiveAllRailInfo.as_view()),
-    # path("search?station=/<str:station>", RailInfoSearchAPIView.as_view()),
     url(r"^search/$", RailInfoSearchAPIView.as_view()),
     url(r"distance/$", RailInfoCalculateDistanceAPIView.as_view()),
-    # url(r"^search/(?P<station>\d+)", RailInfoSearchAPIView.as_view())
 ]

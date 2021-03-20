@@ -69,6 +69,7 @@ class RailInfoSearchAPIView(PermissionMixin, generics.ListAPIView):
         query_param = request.GET.get("station")
         if query_param is not None:
             info = helpers.get_railinfo_by_station(query_param)
+            print(type(info))
             resp = RailInfoSerializer(info, many=True)
             return Response(resp.data, status.HTTP_200_OK)
         else:
